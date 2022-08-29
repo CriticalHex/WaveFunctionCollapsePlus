@@ -2,7 +2,6 @@
 #include<random>
 #include<ctime>
 #include<vector>
-#include<tuple>
 #include<iostream>
 
 using namespace std;
@@ -16,7 +15,7 @@ public:
 
     Tile() {}
     Tile(string fileName, vector<int> sideValues) {
-        tex.loadFromFile("Tiles/" + fileName);
+        tex.loadFromFile("TinyTiles/" + fileName);
         image.setTexture(tex);
         sides = sideValues;
         name = fileName;
@@ -145,10 +144,10 @@ void collapse(vector<vector<Space*>*> grid, int max_entropy) {
 
 vector<vector<Space*>*> makeGrid(sf::RenderWindow& window, vector<Tile*> all_tiles) {
     vector<vector<Space*>*> grid;
-    for (int i = 0; i < window.getSize().y / 100; i++) {
+    for (int i = 0; i < window.getSize().y / 10; i++) {
         grid.push_back(new vector<Space*>);
-            for (int j = 0; j < window.getSize().x / 100; j++) {
-                grid[i]->push_back(new Space(sf::Vector2f(j * 100, i * 100), all_tiles));
+            for (int j = 0; j < window.getSize().x / 10; j++) {
+                grid[i]->push_back(new Space(sf::Vector2f(j * 10, i * 10), all_tiles));
             }
     }
     return grid;
@@ -159,7 +158,7 @@ int main() {
 
     srand(time(NULL));
 
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Wave Function Collapse", sf::Style::None);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Wave Function Collapse", sf::Style::None);
     window.setPosition(sf::Vector2i(460, 20));
     sf::Event event;
 
@@ -179,7 +178,7 @@ int main() {
                             new Tile("Tile8.png", vector<int>{0, 1, 1, 0}),
                             new Tile("Tile9.png", vector<int>{0, 0, 1, 1}),
                             new Tile("Tile10.png", vector<int>{1, 0, 0, 1}),
-                            new Tile("Tile15.png", vector<int>{1, 1, 1, 1}) };
+                            new Tile("Tile15.png", vector<int>{1, 1, 1, 1}), };
 
     /*vector<Tile*> TileImages{ new Tile("Tile0.png", vector<int>{0, 0, 0, 0}),
                             new Tile("Tile1.png", vector<int>{1, 1, 0, 1}),
